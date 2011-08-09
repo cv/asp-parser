@@ -1,0 +1,10 @@
+A *really* dumb Classic ASP parser
+
+Only useful for generating metrics or writing other sorts of tooling
+around legacy codebases.
+
+Really rough for now (and I'm only learning Citrus), but it's the
+beginning of something that might be remotely useful.  Please message
+me if you have any ideas!
+
+Carlos Villela <cv@lixo.org>
