@@ -1,0 +1,26 @@
+require 'rubygems'
+require 'treetop'
+
+grammar ASP
+
+  rule program
+    (code | junk)* {
+      def get
+        captures[:code].map {|x| x.gsub(/<%=?|%>/, '').strip }
+      end
+    }
+  end
+
+  rule code
+    '<%' statement*
+  end
+
+  rule statement
+    ~/%>/
+  end
+
+  rule junk
+    ~/<%/
+  end
+
+end
