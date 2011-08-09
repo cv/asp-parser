@@ -1,18 +1,19 @@
-require 'rubygems'
-require 'treetop'
-
 grammar ASP
 
   rule program
-    (code | junk)* {
+    ('<%' ws? !'=' code '%>' | '<%' ws? '=' write '%>' | junk)* {
       def get
-        captures[:code].map {|x| x.gsub(/<%=?|%>/, '').strip }
+        captures[:code].map {|x| [:code, x.strip] } + captures[:write].map {|x| [:write, x.strip] }
       end
     }
   end
 
+  rule write
+    statement
+  end
+
   rule code
-    '<%' statement*
+    statement*
   end
 
   rule statement
@@ -21,6 +22,10 @@ grammar ASP
 
   rule junk
     ~/<%/
+  end
+
+  rule ws
+    [\s+]
   end
 
 end
